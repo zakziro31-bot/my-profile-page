@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title><span class="pnl-glow">PNL PNL</span> — Elite Developer Profile</title>
+<style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif;}
+
+    body {
+        min-height:100vh;
+        background:#000e1a;
+        overflow-x:hidden;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:center;
+        position:relative;
+        padding-top:40px;
+    }
+
+    .bg-pro, .grid, .glow {position:absolute; inset:0; z-index:-1;}
+    .bg-pro {background:radial-gradient(circle at center, #062038 0%, #000813 75%); z-index:-3;}
+    .grid {
+        background-size:60px 60px;
+        background-image:linear-gradient(to right, rgba(0,180,255,0.18) 1px, transparent 1px),
+                         linear-gradient(to bottom, rgba(0,180,255,0.18) 1px, transparent 1px);
+        animation:gridMove 10s linear infinite;
+        opacity:0.28;
+        z-index:-2;
+    }
+    @keyframes gridMove {0% {transform:translateY(0);} 100% {transform:translateY(-240px);}}
+    .glow {width:420px;height:420px;background:radial-gradient(circle, rgba(0,160,255,0.55), transparent 70%);
+          filter:blur(70px); animation:glowPulse 4.5s infinite ease-in-out; z-index:-1;}
+    @keyframes glowPulse {0%,100% {opacity:0.45;} 50% {opacity:0.85;}}
+
+    .card {
+        width:620px;
+        padding:45px 50px;
+        border-radius:22px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(22px);
+        border:1px solid rgba(0,180,255,0.35);
+        box-shadow:0 0 40px rgba(0,150,255,0.5);
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        margin-bottom:40px;
+    }
+
+    .profile-pic {width:155px; height:155px; border-radius:50%; border:3px solid #00aaff;
+                  box-shadow:0 0 22px #009dff; object-fit:cover; margin-bottom:22px;}
+
+    .title {font-size:30px; font-weight:800; text-align:center; color:#e6f5ff; margin-bottom:18px;
+             text-shadow:0 0 12px #00b4ff;}
+    .dynamic-text {color:#00c8ff; font-weight:900; border-right:2px solid #00c8ff;
+                    padding-right:6px; animation:cursorBlink 0.8s infinite; font-size:30px;}
+    @keyframes cursorBlink {50% {border-color:transparent;}}
+
+    .tag {display:inline-flex; align-items:center; gap:8px; padding:10px 16px;
+          background:rgba(0,150,255,0.18); border-radius:12px; color:#e6f7ff; margin:5px;
+          font-size:16px; box-shadow:0 0 15px rgba(0,150,255,0.4);}
+    .tag img {width:20px; opacity:0.9;}
+
+    .pnl-glow {font-weight:900; color:#00eaff; text-shadow:0 0 8px #00eaff,0 0 16px #00bcd4,0 0 28px #008c9e;
+                letter-spacing:2px; animation:pnlPulse 2.5s infinite ease-in-out; font-size:30px;}
+    @keyframes pnlPulse {0% {text-shadow:0 0 8px #00eaff,0 0 16px #00bcd4; transform:scale(1);}
+                           50% {text-shadow:0 0 20px #00eaff,0 0 32px #00bcd4; transform:scale(1.05);}
+                           100% {text-shadow:0 0 8px #00eaff,0 0 16px #00bcd4; transform:scale(1);}}
+
+    .advice {text-align:center; color:#d9ecf7; font-size:18px; margin:28px 0;}
+    .social-section {margin-top:auto; padding:20px 0; display:flex; justify-content:center; gap:20px;}
+    .social img {width:40px; transition: transform 0.3s, filter 0.3s;}
+    .social img:hover {transform:scale(1.2); filter:drop-shadow(0 0 12px #00eaff);}
+</style>
+</head>
+<body>
+
+<div class="bg-pro"></div>
+<div class="grid"></div>
+<div class="glow"></div>
+
+<div class="card">
+    <img src="pnl.webp" class="profile-pic" />
+
+    <div class="title">
+        PNL PNL — <span class="dynamic-text" id="dynamicText"></span>
+    </div>
+
+    <p class="advice">💡 <strong>Advice:</strong> Keep improving your VS Code workflow, master clean CSS structures, and write JavaScript that is fast, modern, and scalable.</p>
+
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/visual-studio-code-2019.png" /> VS Code Mastery</div>
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/css3.png" /> Advanced CSS Styling</div>
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/javascript.png" /> Modern JavaScript</div>
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/java-coffee-cup-logo.png" /> Java Development</div>
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/web.png" /> Website Development</div>
+    <div class="tag"><img src="https://img.icons8.com/fluency/48/source-code.png" /> Front‑End & UI Logic</div>
+</div>
+
+<script>
+const words = [
+    "Elite Developer",
+    "Software Architect",
+    "System Engineer",
+    "Technology Designer",
+    "Performance Specialist",
+    "High‑Level Programmer",
+    "Digital Architect"
+];
+let i=0,j=0,current='',isDeleting=false;
+const el=document.getElementById("dynamicText");
+function typeEffect(){
+  let word=words[i];
+  if(!isDeleting) current=word.substring(0,j++);
+  else current=word.substring(0,j--);
+  el.textContent=current;
+  if(!isDeleting&&j===word.length+1){isDeleting=true;setTimeout(typeEffect,1100);return;}
+  if(isDeleting&&j<0){isDeleting=false;i=(i+1)%words.length;}
+  setTimeout(typeEffect,isDeleting?45:85);
+}
+typeEffect();
+</script>
+
+<footer class="social-section">
+  <a href="#" class="social"><img src="https://img.icons8.com/fluency/48/facebook-new.png" /></a>
+  <a href="#" class="social"><img src="https://img.icons8.com/fluency/48/instagram-new.png" /></a>
+  <a href="#" class="social"><img src="https://img.icons8.com/fluency/48/discord-logo.png" /></a>
+</footer>
+
+</body>
+</html>
